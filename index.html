@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Text Encryption and Decryption Tool</title>
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Secure Text Encryption and Decryption Tool</h1>
+    <textarea id="input" rows="10" cols="50" placeholder="Enter your text here..."></textarea>
+    <br>
+    <button onclick="encryptText()">Encrypt</button>
+    <button onclick="decryptText()">Decrypt</button>
+    <h2>Encrypted/Decrypted Text:</h2>
+    <p id="output"></p>
+
+    <script>
+        // Simple encryption function using a simplified version of AES
+        function simpleEncrypt(text, key) {
+            var encryptedText = CryptoJS.AES.encrypt(text, key).toString();
+            return encryptedText;
+        }
+
+        // Simple decryption function using a simplified version of AES
+        function simpleDecrypt(encryptedText, key) {
+            var decryptedText = CryptoJS.AES.decrypt(encryptedText, key).toString(CryptoJS.enc.Utf8);
+            return decryptedText;
+        }
+
+        // Function to handle the encryption process
+        function encryptText() {
+            var inputText = document.getElementById("input").value;
+            var key = "supersecretkey"; // A secret key (in a real-world scenario, this key should be managed securely)
+            var encryptedText = simpleEncrypt(inputText, key);
+            document.getElementById("output").textContent = encryptedText;
+        }
+
+        // Function to handle the decryption process
+        function decryptText() {
+            var encryptedText = document.getElementById("input").value;
+            var key = "supersecretkey"; // The same secret key used for encryption
+            var decryptedText = simpleDecrypt(encryptedText, key);
+            document.getElementById("output").textContent = decryptedText;
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+</body>
+</html>
